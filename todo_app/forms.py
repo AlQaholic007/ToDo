@@ -25,10 +25,10 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 class UserEditForm(forms.ModelForm):
-    old_password = forms.CharField(label='Password',widget=forms.PasswordInput)
-    password = forms.CharField(label='Password',
+    old_password = forms.CharField(label='Old password',widget=forms.PasswordInput)
+    password = forms.CharField(label='New password',
                                widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password',
+    password2 = forms.CharField(label='Confirm new password',
                                 widget=forms.PasswordInput)
     class Meta:
         model = User
