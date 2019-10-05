@@ -10,7 +10,7 @@
 {% else %}
 <p>Please use the following form to log-in:</p>
 {% endif %}
-<div class="login-form clearfix"></div>
+<div class="login-form clearfix">
     <form action="{% url 'login' %}" method="POST">
         {{ form.as_p }}
         {% csrf_token %}
