@@ -392,7 +392,7 @@ a.edit {
 
 .topnav {
   overflow: hidden;
-  background-color: #424242;
+  background-color: #00E676;
 }
 
 .topnav a {
@@ -406,7 +406,7 @@ a.edit {
 }
 
 .topnav a:hover {
-  background-color: #ddd;
+  background-color: #DCE775;
   color: black;
 }
 
