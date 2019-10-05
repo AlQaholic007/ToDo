@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Mail tasks{% endblock %}
+{% block body %}
+{% if not sent %}
+<h1>Share tasks by e-mail</h1>
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send e-mail">
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Log-in {% endblock %}
+
+{% block body %}
+<h1>Log-in</h1>
+{% if forms.errors %}
+<p>Your username and password didn't match.
+   Please try again.
+</p>
+{% else %}
+<p>Please use the following form to log-in:</p>
+{% endif %}
+<div class="login-form clearfix"></div>
+    <form action="{% url 'login' %}" method="POST">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <p><input type="submit" value="Log-in">
+        <input type="submit" value="Sign up" formaction="{% url 'register' %}"></p>
+    </form>
+    <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
+</div>
+<!-- <div class='social'>
+    <ul>
+        <li class='twitter'><a href="{% url 'social:begin' 'twitter' %}">Sign in with Twitter</a></li>
+    </ul>
+</div> -->
+
+
+{% endblock %}

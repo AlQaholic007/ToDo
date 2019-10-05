@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} 
+{% block body %}
+<h1>Dashboard</h1>
+<div class="today">{% now "jS F Y" %}</div>
+<p style="text-align: center;">What's in for today {{ request.user.first_name }}?</p>
+<div class="btns">
+    <div class="dropdown">
+        <button class="dropbtn filter-btn">Filter by</button>
+        <div class="dropdown-content">
+            <a href="{% url 'dashboard' %}">All</a>
+        <a href="{% url 'dashboard' 'completed' %}">Completed</a>
+        <a href="{% url 'dashboard' 'expired' %}">Expired</a>
+        <a href="{% url 'dashboard' 'incomplete' %}">Incomplete</a>
+        </div>
+    </div>
+      
+    <div class="dropdown">
+        <button class="dropbtn tools-btn">Tools</button>
+        <div class="dropdown-content">
+        <a href="{% url 'delete_filter' 'completed' %}">Delete completed 💯</a>
+        <a href="{% url 'delete_filter' 'expired' %}">Delete expired 🚫</a>
+        <a href="{% url 'mail_list' %}">Share tasks 📧</a>
+        </div>
+    </div>
+</div>
+<div class="task-container">
+  <!-- <ul>
+    {% for task in tasks %}
+    {% if task.completed %}
+      <li class="task">
+        <a href="{% url 'toggle_task' task.id %}" class="complete"><del>{{ task.title }}</del></a>
+        <a href="{% url 'detail' task.id task.slug %}" class="task-detail">EDIT</a>
+        
+      </li>
+    {% elif task.expired %}
+        <li class="task">
+            <a href="{% url 'toggle_task' task.id %}" class="expired {{ task.priority }}">{{ task.title }}</a>
+            <a href="{% url 'detail' task.id task.slug %}" class="task-detail">EDIT</a>
+        </li>
+    {% else %}
+      <li class="task">
+          <a href="{% url 'toggle_task' task.id %}"" class="incomplete {{ task.priority }}">{{ task.title }}</a>
+          <a href="{% url 'detail' task.id task.slug %}" class="task-detail">EDIT</a>
+      </li>
+    {% endif %}
+    {% endfor %}
+  </ul> -->
+  {% for task in tasks %}
+  <div class="task-card">
+    <div class="task-title">
+        {% if task.completed %}
+          <a href="{% url 'toggle_task' task.id %}" class="complete"><del>{{ task.title }}</del>👍🏻</a>
+        {% elif task.expired %}
+            <a href="{% url 'toggle_task' task.id %}" class="expired">{{ task.title }}👎🏻</a>
+        {% else %}
+            <a href="{% url 'toggle_task' task.id %}"" class="{{ task.priority }}">{{ task.title }}</a>
+        {% endif %}
+    </div>
+    <div class="task-body">
+      {% if task.expired %}
+      <p class="useless">EXPIRED!</p>
+      {% else %}
+      <p>{% if task.description %}{{ task.description|linebreaks }}{% else %}No description available{% endif %}</p>
+      <p class="due">Date created: <small class="due">{{ task.date_created }}</small></p>
+      <p class="due">Date due: <small class="due">{{ task.date_due }}</small></p>
+      <div class="btns">
+          <a href="{% url 'detail' task.id task.slug %}" class="detail">VIEW</a>
+          <a href="{% url 'edit_task' task.id %}" class="edit">EDIT</a>
+          <a href="{% url 'delete' task.id %}" class="delete">DELETE</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+{% include "pagination.html" with page=tasks %}
+{% endblock %}

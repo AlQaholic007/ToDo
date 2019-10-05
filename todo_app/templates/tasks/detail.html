@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Task details{% endblock %} 
+{% block body %}
+<div class="detail-container">
+  <table id="details">
+    <tr>
+      <th>title</th>
+      <td>{{ task.title }}</td>
+    </tr>
+    <tr>
+      <th>created</th>
+      <td>{{ task.date_created }}</td>
+    </tr>
+    <tr>
+      <th>due</th>
+      <td>{{ task.date_due }}</td>
+    </tr>
+    {% if task.description %}
+    <tr>
+      <th>description</th>
+      <td>{{ task.description }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <th>completed</th>
+      <td>{{ task.completed }}</td>
+    </tr>
+  </table>
+</div>
+<!-- <div class='edit-form'>
+    <form action="." method="POST">
+      <h1>Edit task</h1>
+      <p>Please use this form to edit task:</p>
+      {{ form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Edit" /></p>
+    </form>
+</div> -->
+<div class="btns">
+  <a href="{% url 'edit_task' task.id %}" class="edit">Edit</a>
+</div>>
+{% endblock %}
