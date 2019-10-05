@@ -25,9 +25,26 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['password2']
 
 class UserEditForm(forms.ModelForm):
+    old_password = forms.CharField(label='Password',widget=forms.PasswordInput)
+    password = forms.CharField(label='Password',
+                               widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repeat password',
+                                widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ('first_name','last_name','email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']
+
+    def clean_old_password(self):
+        valid = self.user.check_password(self.cleaned_data['old_password'])
+        if not valid:
+            raise forms.ValidationError('Old password is incorrect.')
+        return self.cleaned_data['old_password']
 
 class TaskCreateForm(forms.ModelForm):
     class Meta:
