@@ -15,10 +15,10 @@
         {{ form.as_p }}
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
-        <p><input type="submit" value="Log-in">
+        <p><input type="submit" value="Log-in"></p>
     </form>
     <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
-    <input type="submit" value="Sign up" formaction="{% url 'register' %}"></p>
+    <p><a href="{% url 'register' %}" class="signup">Sign up</p>
 </div>
 <!-- <div class='social'>
     <ul>
