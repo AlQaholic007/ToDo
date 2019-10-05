@@ -412,7 +412,7 @@ a.edit {
 
 .topnav a.active {
   background-color: rgb(230, 255, 5);
-  color: white;
+  color: black;
 }
 
 .topnav .icon {
