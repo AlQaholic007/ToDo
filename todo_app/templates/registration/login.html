@@ -1,17 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Log-in {% endblock %}
 
-{% block links %}
-<style>
-a.registerbtn {
-    border: 1px solid rgb(122, 255, 34);
-}
-</style>
-
-{% endblock %}
-
 {% block body %}
-<h1>Log-in</h1>
+<h1>Log-in or <a href="{% url 'register' %}">Sign up</a></h1>
 {% if forms.errors %}
 <p>Your username and password didn't match.
    Please try again.
@@ -23,7 +14,7 @@ a.registerbtn {
     {{ form.as_p }}
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
-    <p><input type="submit" value="Log-in"> <a class="registerbtn" href="{% url 'register' %}">Sign up</p>
+    <p><input type="submit" value="Log-in"></p>
 </form>
     <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
 <!-- <div class='social'>
