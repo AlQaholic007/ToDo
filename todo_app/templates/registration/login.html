@@ -10,15 +10,13 @@
 {% else %}
 <p>Please use the following form to log-in:</p>
 {% endif %}
-<div class="login-form clearfix">
-    <form action="{% url 'login' %}" method="POST">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <p><input type="submit" value="Log-in"><a href="{% url 'register' %}" class="signup">Sign up</p>
-    </form>
+<form action="{% url 'login' %}" method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <p><input type="submit" value="Log-in"><a href="{% url 'register' %}" class="signup">Sign up</p>
+</form>
     <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
-</div>
 <!-- <div class='social'>
     <ul>
         <li class='twitter'><a href="{% url 'social:begin' 'twitter' %}">Sign in with Twitter</a></li>
