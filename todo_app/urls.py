@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('login/',auth_views.LoginView.as_view(),name='login'),
-    path('',auth_views.LoginView.as_view()),
+    path('login/',auth_views.LoginView.as_view(redirect_authenticated_user=True),name='login'),
+    path('',auth_views.LoginView.as_view(redirect_authenticated_user=True)),
     path('logout/',auth_views.LogoutView.as_view(),name='logout'),
     path('dashboard/',views.dashboard,name='dashboard'),
     path('dashboard/<str:task_filter>/',views.dashboard,name='dashboard'),
