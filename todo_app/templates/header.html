@@ -43,9 +43,9 @@
     <a href="{% url 'create' %}" {% if section == "tasks" %}class="active"{% endif %}>Add task</a>
     <a href="{% url 'edit' %}" {% if section == "edit" %}class="active"{% endif %}>Profile</a>
     <div class="search-container">
-        <form action="{% url 'dashboard' 'search' %}" method="get" id="search-form">
+        <form action="{% url 'dashboard' 'search' %}" method="get" id="searchform">
           <input type="text" placeholder="Search.." name="q">
-          <button type="submit" form="search-form"></button><i class="fa fa-search"></i></button>
+          <button type="submit" form="searchform"></button><i class="fa fa-search"></i></button>
         </form>
     </div>
     <!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a> -->
