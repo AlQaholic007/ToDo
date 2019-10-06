@@ -68,10 +68,10 @@ def dashboard(request,task_filter=None):
         task_list = Item.objects.filter(user=request.user,completed = False)
         ids = [task.id for task in task_list if not task.expired()]
         task_list = task_list.filter(id__in=ids)
-    elif task_filter == 'search':
+    elif task_filter == "search":
         query = self.request.GET.get('q')
         if query:
-            task_list = Item.objects.filter(user=request.user and Q(title__icontains=query))
+            task_list = Item.objects.filter(Q(title__icontains=query),Q(user=request.user))
         else:
             task_list = Item.objects.filter(user=request.user)
     else:
