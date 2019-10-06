@@ -70,7 +70,7 @@ def dashboard(request,task_filter=None):
         task_list = task_list.filter(id__in=ids)
     elif task_filter == 'search':
         query = self.request.GET.get('q')
-        if q:
+        if query:
             task_list = Item.objects.filter(user=request.user and Q(title__icontains=query))
         else:
             task_list = Item.objects.filter(user=request.user)
