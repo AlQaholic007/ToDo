@@ -191,6 +191,8 @@ def delete_task(request,id):
 def delete_filter(request,task_filter):
     if task_filter == "completed":
         Item.objects.filter(user=request.user,completed=True).delete()
+    elif task_filter == "all":
+        Item.objects.filter(user=request.user).delete()
     else:
         ids = [task.id for task in Item.objects.filter(user=request.user) if task.expired()]
         Item.objects.filter(id__in=ids).delete()
