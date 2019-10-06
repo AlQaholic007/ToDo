@@ -13,6 +13,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 
 # Create your views here.
@@ -67,6 +68,12 @@ def dashboard(request,task_filter=None):
         task_list = Item.objects.filter(user=request.user,completed = False)
         ids = [task.id for task in task_list if not task.expired()]
         task_list = task_list.filter(id__in=ids)
+    elif task_filter == 'search':
+        query = self.request.GET.get('q')
+        if q:
+            task_list = Item.objects.filter(user=request.user and Q(title__icontains=query))
+        else:
+            task_list = Item.objects.filter(user=request.user)
     else:
         task_list = Item.objects.filter(user=request.user)
     
